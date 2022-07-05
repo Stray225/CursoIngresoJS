@@ -2,18 +2,28 @@
 Debemos lograr tomar el importe por ID.
 Transformarlo a entero (parseInt), luego
 mostrar el importe con un Descuento del 25 %
-en el cuadro de texto "RESULTADO"*/
+en el cuadro de texto "RESULTADO"
+Se pedirá el importe del descuento por prompt. 
+Además se deberá mostrar por alert el siguiente mensaje: 
+"Ud obtuvo un descuento de $xx"*/
+
 function mostrarAumento()
 {
 	let aumento;
 	let	sueldo;
 	let resultado;
-	aumento = parseFloat(0.25);
+	let mensaje;
 
-	sueldo = parseInt(document.getElementById("txtIdImporte").value);
+	sueldo = parseInt(txtIdImporte.value);
 
-	resultado = sueldo - (sueldo * aumento);
+	aumento = prompt("Ingrese un valor para que se le otorgue un descuento: ")
+	aumento = parseInt(aumento);
 
-	document.getElementById("txtIdResultado").value = resultado;
+	resultado = sueldo - (sueldo * (aumento / 100));
+
+	mensaje = "Con el descuento aplicado te queda: " + resultado;
+	txtIdResultado.value = resultado;
+
+	alert("Se le otorgo un descuento de: " + aumento + "%");
 
 }
