@@ -1,6 +1,9 @@
 function mostrar()
 {
-	//tomo la edad  
-	alert("ok");
-
-}//FIN DE LA FUNCIÓN
+	let edad = parseInt(txtIdEdad.value);
+	if (edad >= 18){
+		alert("Eres mayor de edad");
+	}
+	else
+	alert("No eres mayor de edad capo");
+}

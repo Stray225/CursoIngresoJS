@@ -1,6 +1,10 @@
 function mostrar()
 {
-	//tomo la edad  
-	alert("ok");
+	let edad = parseInt(txtIdEdad.value);
+	if (edad == 15){
+		alert("Niña bonita");
+	}
+	else
+	alert("No tenes 15");
 
-}//FIN DE LA FUNCIÓN
+}//FIN DE LA FUNCIÓN 
