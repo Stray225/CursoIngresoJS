@@ -26,11 +26,11 @@ function CalcularPrecio ()
     let importeFinalAlto = 120;
     let impuestoImporteFinalAlto = 0.1;
     let cuentaDescuentoImporte;
+    let precioMarca
 
     let cantLamparas = document.getElementById("txtIdCantidad").value;
     let marca = document.getElementById("Marca").value;
 
-    let precioMarca
 
 // IF SOLO PARA SACAR PRECIO DE LA MARCA (Si cada una tendria el precio diferente, se haria aca abajo, pero como todo es el mismo para no poner 35, pongo el IF.)
 
