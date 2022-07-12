@@ -1,13 +1,15 @@
 function mostrar()
 {
 	let edad = parseInt(txtIdEdad.value);
+	var mensaje;
+
 	if (edad >= 18){
-		alert("Eres mayor de edad");
+		mensaje = ("Eres mayor de edad");
 	}
 	else if (edad >= 13 && edad <= 17){
-		alert("Eres un adolescente");
+		mensaje = ("Eres un adolescente");
 	}
 	else{
-		alert("Eres un niño");
+		mensaje = ("Eres un niño");
 	}
 }

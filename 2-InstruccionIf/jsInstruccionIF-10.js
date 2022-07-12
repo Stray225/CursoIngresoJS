@@ -1,6 +1,23 @@
 function mostrar()
 {
-	//Genero el número RANDOM entre 1 y 10 
-	alert("ok");
+	var numeroRandom;
+	var numeroRedondeado;
+	var mensaje;
 
-}//FIN DE LA FUNCIÓN
+	numeroRandom = Math.random();
+
+	numeroRandom = numeroRandom * 10 + 1;
+
+	numeroRedondeado = Math.floor(numeroRandom);
+
+	if (numeroRedondeado == 10 || numeroRedondeado == 9){
+		mensaje = mensaje + "Excelente";
+	}
+	else if(numeroRedondeado >= 4){
+		mensaje = mensaje + "Aprobado";
+	}
+	else{
+		mensaje = mensaje + "NT COMO UNA CASA CHAVAL";
+	}
+	alert("Su nota es: " + numeroRedondeado + mensaje);
+}
