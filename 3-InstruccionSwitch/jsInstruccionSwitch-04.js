@@ -24,11 +24,6 @@ function mostrar()
 		case "Diciembre":
 			mensaje = "Este mes tiene 31 dias";
 		break
-
-
-
-
-
 		default:
 			mensaje = "Falta para el invierno";
 		break
