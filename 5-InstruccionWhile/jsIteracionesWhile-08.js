@@ -11,6 +11,23 @@ function mostrar()
 	sumaPositivos=0;
 	multiplicacionNegativos=1;
 	respuesta='si';
+	let numeroIngresado;
+
+	while(respuesta == "si")
+	{
+		contador = contador + 1;
+		numeroIngresado = parseInt(prompt("Ingrese un numero positivo o negativo: "));
+		if (numeroIngresado > 0)
+		{
+			sumaPositivos = sumaPositivos + numeroIngresado;
+		}
+		else
+		{
+			multiplicacionNegativos = multiplicacionNegativos * numeroIngresado;
+		}
+
+		respuesta = prompt("Desea ingresar un numero? Si/No:");
+	}
 
 
 	txtIdSuma.value=sumaPositivos;

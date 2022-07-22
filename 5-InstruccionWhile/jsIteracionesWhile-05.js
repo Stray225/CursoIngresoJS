@@ -5,8 +5,16 @@ function mostrar()
 {
 	var sexoIngresado;
 	sexoIngresado = prompt("ingrese f ó m .");
+	let mensaje;
 
+	if (sexoIngresado == "f" || sexoIngresado == "m")
+	{
+		txtIdSexo.value=sexoIngresado;
+	}
+	else
+	{
+		mensaje = "Incorrecto";
+		txtIdSexo.value=mensaje;
+	}
 
-
-	txtIdSexo.value=sexoIngresado;
 }//FIN DE LA FUNCIÓN

@@ -1,7 +1,6 @@
 function mostrar()
 {
 	var estacionIngresada =txtIdEstacion.value;
-
 	var destinoIngresado =txtIdDestino.value;
 
 	let mensaje;
@@ -83,13 +82,3 @@ function mostrar()
 
 }
 
-
-
-/*
-
-switch 
-	verano
-	invierno
-	octoño y primavera
-
-*/
