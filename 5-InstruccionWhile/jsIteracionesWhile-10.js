@@ -26,8 +26,6 @@ function mostrar()
 	let difPositivoNegativo=0;
 	let acumuladorPositivo=0;
 	let acumuladorNegativo=0;
-	let mensaje;
-
 
 	respuesta="si";
 

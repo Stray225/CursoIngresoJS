@@ -11,7 +11,7 @@ function mostrar()
 	{
 		numeroIngresado = parseInt(prompt("Ingrese un numero"));
 		acumulador = acumulador + numeroIngresado;
-		contador = contador + 1
+		contador++;
 	}
 
 	txtIdSuma.value=acumulador;

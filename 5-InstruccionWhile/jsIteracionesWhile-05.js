@@ -16,5 +16,11 @@ function mostrar()
 		mensaje = "Incorrecto";
 		txtIdSexo.value=mensaje;
 	}
+	
+}
 
-}//FIN DE LA FUNCIÓN
+
+/*
+
+
+//FIN DE LA FUNCIÓN

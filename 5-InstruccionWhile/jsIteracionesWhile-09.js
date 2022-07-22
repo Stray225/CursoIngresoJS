@@ -6,32 +6,29 @@ function mostrar()
 	var numeroIngresado;
 	var numeroMaximo;
 	var numeroMinimo;
-	var respuesta;
+	var respuesta;	
 	//iniciar variables
+
+	let banderaDelPrimero = false; // o 0
+
 	respuesta='si';
-	let numeroBandera;
 
-	numeroMaximo = 0;
-	numeroMinimo = 0;
-
-
-	numeroBandera = parseInt(prompt("Ingrese el primer numero: "));
-
-	while(respuesta=="si")
+	while(respuesta == "si")
 	{
-		numeroIngresado = parseInt(prompt("Ingrese un numero: "));
-		if(numeroIngresado > numeroBandera)
-		{
-			numeroMaximo = numeroIngresado;
-			alert(numeroMaximo);
-		}
-		else if (numeroIngresado < numeroBandera)
-		{
-			numeroMinimo = numeroIngresado;
-			alert(numeroMinimo);
-		}
-		respuesta=prompt("desea continuar?");
+	numeroIngresado = parseInt(prompt("Ingrese un numero: "));
+	if(numeroIngresado > numeroMaximo || banderaDelPrimero == false)
+	{
+		numeroMaximo = numeroIngresado;
 	}
+	if(numeroIngresado < numeroMinimo || banderaDelPrimero == false)
+	{
+		numeroMinimo = numeroIngresado;
+		banderaDelPrimero = true;
+	}
+	respuesta=prompt("desea continuar?");
+	}
+
+
 	txtIdMaximo.value=numeroMaximo;
 	txtIdMinimo.value=numeroMinimo;
 }//FIN DE LA FUNCIÓN
