@@ -1,89 +1,113 @@
-/*Ejercicio 3 AGUSTIN PAZOS
+/*/*Ejercicio 2 AGUSTIN PAZOS
 
-UTN airlines nos pide desarrollar una app para registrar el ingreso de pasajeros a distintos vuelos, 
-se le pide a los pasajeros: nombre, edad (validar 13-85), cantidad de asientos que desea reservar 
-(validar minimo 1 maximo 5 asientos), cantidad de kilómetros del viaje (validar 3000 kilómetros 
-el mínimo - 18000 kilómetros máximo) y el destino (validar río de janeiro, italia, cancún, japón), 
-el precio por asiento es 1500 pesos, informar:
-1) la recaudación total bruta del vuelo
-2) la cantidad total asientos ocupados
-3) la edad promedio por pasajero
-
-Tener en cuenta que:
-
-dependiendo el destino seleccionado se aplican aumentos o descuentos según corresponda:
-japón 40% de aumento
-rio 10% descuento
-italia 25% aumento
-cancún 5% descuento
-
-según la cantidad de asientos reservados se aplican ciertos descuentos sobre el PRECIO FINAL:
-1 pasajero 10% descuento
-2-3 pasajeros 15% descuento
-4-5 pasajeros 20% descuento
-
+Una librería que se especializa en venta de libros importados desea calcular ciertas métricas en base
+a las ventas de sus productos.
+Se ingresa de cada venta:
+Título del libro
+Género: (ciencia ficción – Drama – Terror)
+Material del libro (rústica – tapa dura)
+Importe (No pueden ser números negativos ni mayor a los 30000)
+Se pide:                          	
+a) El libro más barato de drama con su importe.
+b) Del libro más caro, el título.
+c) Porcentaje de libros de cada género
+d) La cantidad de libros que sean de ciencia ficción y cuesten menos de $700.
 */
+
 
 function mostrar()
 {
-	let nombreIngresado;
-	let edadIngresada; // validar 13-85
-	let cantAsientos; // los que quiere comprar min 1 - max 5
-	let cantKilometros; // min 3000 - max 18000 validar 
-	let destino; // validar río de janeiro, italia, cancún, japón
-	let precioAsiento = 1500;
+	let tituloIngresado;
+	let generoIngresado; // ciencia ficción – Drama – Terror
+	let materialIngresado; // rústica – tapa dura
+	let importe; // No pueden ser números negativos ni mayor a los 30000
 
+	let libroMasBaratoDrama; // nombre con su importe
+	let libroMasCaro; // mostrar el nombre
+	let porcentajeLibrosGeneroDrama = 0;
+	let porcentajeLibrosGeneroTerror = 0;
+	let porcentajeLibrosGeneroCF = 0; 
+	let cantLibrosCFBaratos = 0; // La cantidad de libros que sean de ciencia ficción y cuesten menos de $700
 	let respuesta = "si";
-	let asientosOcupados = 0;
-	let edadPromedio = 0;
-	let sumaEdades = 0;
+
+	let banderaMasBaratoDrama = false;
+	let banderaMasCaro = false;
+	let importeMasCaro = 0;
+	let importeMasBarato = 0;
 	let contador = 0;
-	let recaudacionBruta = 0;
+	let cantLibrosDrama = 0;
+	let cantLibrosCF = 0;
+	let cantLibrosTerror = 0;
+	let importeMasBaratoDrama = 0;
 
-	while(respuesta = "si")
+	while(respuesta == "si")
 	{
-		nombreIngresado = prompt("Ingrese su nombre: ");
-		edadIngresada = parseInt(prompt("Ingrese su edad: "));
-		while(edadIngresada < 13 || edadIngresada > 85)
+		tituloIngresado = prompt("Ingrese el titulo del libro: ");
+		generoIngresado = prompt("Ingrese el genero del titulo: ");
+		while(generoIngresado!="ciencia ficcion" && generoIngresado!="drama" && generoIngresado!="terror")
 		{
-			edadIngresada = parseInt(prompt("REingrese su edad POR FAVOR: "));
+			generoIngresado = prompt("REingrese el genero del titulo POR FAVOR: ");
 		}
-		cantAsientos = parseInt(prompt("Ingrese la cantidad de asientos que desee reservar: "));
-		while(cantAsientos < 1 || cantAsientos > 5)
+		materialIngresado = prompt("Ingrese el material del libro: ");
+		while(materialIngresado!="rustica" && materialIngresado!="tapa dura")
 		{
-			cantAsientos = parseInt(prompt("REingrese la cantidad de asientos que desee reservar POR FAVOR: "));
+			materialIngresado = prompt("REingrese el material del libro POR FAVOR: ");
 		}
-		cantKilometros = parseInt(prompt("Ingrese la cantidad de kilometros de su viaje: "));
-		while(cantKilometros < 3000 || cantKilometros > 18000)
+		importe = parseFloat(prompt("Ingrese el importe del titulo: "));
+		while(importe < 0 || importe > 30000)
 		{
-			cantKilometros = parseInt(prompt("REingrese la cantidad de kilometros de su viaje POR FAVOR: "));
+			importe = parseFloat(prompt("REingrese el importe del titulo POR FAVOR: "));
 		}
-		destino = prompt("Ingrese su destino a continuación: ");
-		while(destino!="rio de janerio" && destino!="italia" && destino!="cancun" && destino!="japon")
-		{
-			destino = prompt("REingrese su destino a continuación POR FAVOR: ");
-		}
-		// 1) la recaudación total bruta del vuelo
-		recaudacionBruta = recaudacionBruta + (cantAsientos * precioAsiento);
-		// 2) la cantidad total asientos ocupados
-		asientosOcupados = asientosOcupados + cantAsientos;
-		// 3)
-		sumaEdades = sumaEdades + edadIngresada;
 
+		// mas caro
+		if(importe > importeMasCaro || banderaMasCaro == false)
+		{
+			importeMasCaro = importe;
+			libroMasCaro = tituloIngresado;
+			importeMasBaratoDrama = importe; // 0 iq
+			banderaMasCaro = true;
+		}
+		// mas barato de drama con importe
+
+		if(generoIngresado == "drama" && importe < importeMasBarato || banderaMasBaratoDrama == false)
+		{
+			importeMasBarato = importe;
+			libroMasBaratoDrama = tituloIngresado;
+			banderaMasBaratoDrama = true;
+		}
+		//  La cantidad de libros que sean de ciencia ficción y cuesten menos de $700
+		if(generoIngresado == "ciencia ficcion" && importe < 700)
+		{
+			cantLibrosCFBaratos++
+		}
+
+		//  Porcentaje de libros de cada género
+		if(generoIngresado == "drama")
+		{
+			cantLibrosDrama++
+		}
+		else if (generoIngresado == "terror")
+		{
+			cantLibrosTerror++;
+		}
+		else
+		{
+			cantLibrosCF++;
+		}
 
 		contador++;
-		respuesta = prompt("Desea ingresar un nuevo pasajero? si/no: ");
+		respuesta = prompt("Quiere volver a ingresar un titulo nuevo? si/no: ");
 	}
+	porcentajeLibrosGeneroDrama = 100 * (cantLibrosDrama / contador);
+	porcentajeLibrosGeneroTerror = 100 * (cantLibrosTerror / contador);
+	porcentajeLibrosGeneroCF = 100 * (cantLibrosCF / contador);
+	
+	document.write("El libro más barato de drama con su importe: " + libroMasBaratoDrama + " y su importe es de " + importeMasBaratoDrama + "<br>");
+	document.write("Del libro más caro, el título: " + libroMasCaro + "<br>");
+	document.write("La cantidad de libros que sean de ciencia ficción y cuesten menos de $700: " + cantLibrosCFBaratos + "<br>");
 
-		// 3) la edad promedio por pasajero
-		edadPromedio = sumaEdades / contador;
+	document.write("Porcentaje de libros de cada género drama: " + porcentajeLibrosGeneroDrama + "%<br>");
+	document.write("Porcentaje de libros de cada género terror: " + porcentajeLibrosGeneroTerror + "%<br>");
+	document.write("Porcentaje de libros de cada género CF: " + porcentajeLibrosGeneroCF + "%<br>");
 
-	document.write("La recaudación total bruta del vuelo: " + recaudacionBruta + "%<br>");
-	document.write("La cantidad total asientos ocupados: " + asientosOcupados + "%<br>");
-	document.write("La edad promedio por pasajero: " + edadPromedio + "%<br>");
 }
-
-/*
-1) la recaudación total bruta del vuelo
-2) la cantidad total asientos ocupados
-3) la edad promedio por pasajero

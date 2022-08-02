@@ -49,17 +49,17 @@ function mostrar()
 	{
 		nombreIngresado = prompt("Ingrese su nombre del pasajero: ");
 		edadIngresada = parseInt(prompt("Ingrese su edad del pasajero: "));
-		while(edadIngresada < 13 || edadIngresada > 85)
+		while(edadIngresada < 13 || edadIngresada > 85);
 		{
 			edadIngresada = parseInt(prompt("REingrese su edad POR FAVOR: "));
 		}
 		cantAsientos = parseInt(prompt("Ingrese la cantidad de asientos que desee reservar: "));
-		while(cantAsientos < 1 || cantAsientos > 5)
+		while(cantAsientos < 1 || cantAsientos > 5);
 		{
 			cantAsientos = parseInt(prompt("REingrese la cantidad de asientos que desee reservar POR FAVOR: "));
 		}
 		cantKilometros = parseInt(prompt("Ingrese la cantidad de kilometros de su viaje: "));
-		while(cantKilometros < 3000 || cantKilometros > 18000)
+		while(cantKilometros < 3000 || cantKilometros > 18000);
 		{
 			cantKilometros = parseInt(prompt("REingrese la cantidad de kilometros de su viaje POR FAVOR: "));
 		}
