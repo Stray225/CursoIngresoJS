@@ -1,113 +1,171 @@
-/*/*Ejercicio 2 AGUSTIN PAZOS
+/*Para el nuevo videojuego "surviving the UTN admission test" se ha solicitado desarrollar 
+el sistema de estadísticas que nos mostrará información sobre los jugadores registrados en el juego.
 
-Una librería que se especializa en venta de libros importados desea calcular ciertas métricas en base
-a las ventas de sus productos.
-Se ingresa de cada venta:
-Título del libro
-Género: (ciencia ficción – Drama – Terror)
-Material del libro (rústica – tapa dura)
-Importe (No pueden ser números negativos ni mayor a los 30000)
-Se pide:                          	
-a) El libro más barato de drama con su importe.
-b) Del libro más caro, el título.
-c) Porcentaje de libros de cada género
-d) La cantidad de libros que sean de ciencia ficción y cuesten menos de $700.
+Para ello por cada jugador, debemos ingresar:
+Nombre del jugador,
+Tipo de personaje("guerrero", "arquero" o "mago"),
+Fuerza de ataque ( 1 a 10 inclusive ),
+Resistencia a ataques (1 a 5 inclusive),
+Tiene bonificación (si o no). Si tiene bonificación, el ataque y la resistencia  se duplican.
+
+Se nos pide mostrar:
+
+a) Nombre y tipo de personaje del personaje más poderoso y el más débil con y sin bonificación.
+b) Cuantos personajes de cada tipo atacan por más de 5,y resisten por más de 3.
+c) Cuantos arqueros sin bonificación tienen fuerza de ataque menor a 3 pero resistencia mayor a 3.
+d) Cual es el promedio de fuerza de ataque de todos los guerreros sin bonificación,
+y cual de todos los magos con bonificación.
+e) Que porcentaje del total de personajes ingresados representa cada tipo de personaje.
 */
-
 
 function mostrar()
 {
-	let tituloIngresado;
-	let generoIngresado; // ciencia ficción – Drama – Terror
-	let materialIngresado; // rústica – tapa dura
-	let importe; // No pueden ser números negativos ni mayor a los 30000
-
-	let libroMasBaratoDrama; // nombre con su importe
-	let libroMasCaro; // mostrar el nombre
-	let porcentajeLibrosGeneroDrama = 0;
-	let porcentajeLibrosGeneroTerror = 0;
-	let porcentajeLibrosGeneroCF = 0; 
-	let cantLibrosCFBaratos = 0; // La cantidad de libros que sean de ciencia ficción y cuesten menos de $700
+	let nombreIngresado;
+	let tipoPersonajeIngresado;
+	let fuerzaIngresada = 0;
+	let resistenciaIngresada = 0;
+	let bonificacionIngresada; //  Si tiene bonificación, el ataque y la resistencia  se duplican.
 	let respuesta = "si";
-
-	let banderaMasBaratoDrama = false;
-	let banderaMasCaro = false;
-	let importeMasCaro = 0;
-	let importeMasBarato = 0;
+	let bonificacion = 2;
+	// a) mas poderoso y mas debil
+	let pjMasFuerte;
+	let banderaMasFuerte;
+	let fuerzaMasFuerte;
+	let tipoMasFuerte;
+	let tipoMasFuerteBonificacionFuerza;
+	let tipoMasFuerteBonificacionResistencia;
+	let pjMasDebil;
+	let banderaMasDebil;
+	let fuerzaMasDebil;
+	let tipoMasDebil;
+	let tipoMasDebilBonificacionFuerza;
+	let tipoMasDebilBonificacionResistencia;
+	//b) Cuantos personajes de cada tipo atacan por más de 5,y resisten por más de 3.
+	let contadorPersonajes5y3;
+	//c) Cuantos arqueros sin bonificación tienen fuerza de ataque menor a 3 pero resistencia mayor a 3.
+	let arquerosSinBonif;
+	//d) Cual es el promedio de fuerza de ataque de todos los guerreros sin bonificación,
+	let promedioFuerzaSinBonif;
+	let sumaFuerzaSinBonif;
+	let contadorFuerzaSinBonif;
+	let promedioMagoBonif;
+	let sumaMagoBonif;
+	let contadorMagoBonif;
+	let magoFuerzaBonificacion;
+	//e) Que porcentaje del total de personajes ingresados representa cada tipo de personaje.
+	let cantidadGuerrero;
+	let cantidadArquero;
+	let cantidadMago;
+	let porcentajeGuerrero;
+	let porcentajeArquero;
+	let porcentajeMago;
 	let contador = 0;
-	let cantLibrosDrama = 0;
-	let cantLibrosCF = 0;
-	let cantLibrosTerror = 0;
-	let importeMasBaratoDrama = 0;
 
 	while(respuesta == "si")
 	{
-		tituloIngresado = prompt("Ingrese el titulo del libro: ");
-		generoIngresado = prompt("Ingrese el genero del titulo: ");
-		while(generoIngresado!="ciencia ficcion" && generoIngresado!="drama" && generoIngresado!="terror")
+		nombreIngresado = prompt("Ingrese el nombre del jugador: ");
+		tipoPersonajeIngresado = prompt("Ingrese el tipo de personaje: ");
+		while(tipoPersonajeIngresado!="guerrero" && tipoPersonajeIngresado!="arquero" && tipoPersonajeIngresado!="mago")
 		{
-			generoIngresado = prompt("REingrese el genero del titulo POR FAVOR: ");
-		}
-		materialIngresado = prompt("Ingrese el material del libro: ");
-		while(materialIngresado!="rustica" && materialIngresado!="tapa dura")
-		{
-			materialIngresado = prompt("REingrese el material del libro POR FAVOR: ");
-		}
-		importe = parseFloat(prompt("Ingrese el importe del titulo: "));
-		while(importe < 0 || importe > 30000)
-		{
-			importe = parseFloat(prompt("REingrese el importe del titulo POR FAVOR: "));
+			tipoPersonajeIngresado = prompt("REINGRESE el tipo de personaje: ");
 		}
 
-		// mas caro
-		if(importe > importeMasCaro || banderaMasCaro == false)
+		fuerzaIngresada = parseInt(prompt("Ingrese el nivel de fuerza: "));
+		while(fuerzaIngresada < 1 || fuerzaIngresada > 10)
 		{
-			importeMasCaro = importe;
-			libroMasCaro = tituloIngresado;
-			importeMasBaratoDrama = importe; // 0 iq
-			banderaMasCaro = true;
-		}
-		// mas barato de drama con importe
-
-		if(generoIngresado == "drama" && importe < importeMasBarato || banderaMasBaratoDrama == false)
-		{
-			importeMasBarato = importe;
-			libroMasBaratoDrama = tituloIngresado;
-			banderaMasBaratoDrama = true;
-		}
-		//  La cantidad de libros que sean de ciencia ficción y cuesten menos de $700
-		if(generoIngresado == "ciencia ficcion" && importe < 700)
-		{
-			cantLibrosCFBaratos++
+			fuerzaIngresada = parseInt(prompt("REINGRESE el nivel de fuerza: "));
 		}
 
-		//  Porcentaje de libros de cada género
-		if(generoIngresado == "drama")
+		resistenciaIngresada = parseInt(prompt("Ingrese el nivel de resistencia: "));
+		while(resistenciaIngresada < 1 || resistenciaIngresada > 5)
 		{
-			cantLibrosDrama++
+			resistenciaIngresada = parseInt(prompt("REINGRESE el nivel de resistencia: "));
 		}
-		else if (generoIngresado == "terror")
+
+		bonificacionIngresada = prompt("Confirme si tiene bonificación o no: ");
+		while(bonificacionIngresada != "si" && bonificacionIngresada != "no")
 		{
-			cantLibrosTerror++;
+			bonificacionIngresada = prompt("REINGRESE la confirmación si tiene bonificación o no: ");
 		}
-		else
+
+		//a) Nombre y tipo de personaje del personaje más poderoso y el más débil con y sin bonificación.
+		if (fuerzaIngresada > fuerzaMasFuerte || banderaMasFuerte == false)
 		{
-			cantLibrosCF++;
+			pjMasFuerte = nombreIngresado;
+			tipoMasFuerte = tipoPersonajeIngresado;
+			banderaMasFuerte = true;
+			tipoMasFuerteBonificacionFuerza = fuerzaIngresada * 5;
+			tipoMasFuerteBonificacionResistencia = resistenciaIngresada * 5;
+		}
+
+		if (fuerzaIngresada < fuerzaMasDebil || banderaMasDebil == false)
+		{
+			pjMasDebil = nombreIngresado;
+			tipoMasDebil = tipoPersonajeIngresado;
+			banderaMasDebil = true;
+			tipoMasDebilBonificacionFuerza = fuerzaIngresada * 5;
+			tipoMasDebilBonificacionResistencia = resistenciaIngresada * 5;
+		}
+
+		//b) Cuantos personajes de cada tipo atacan por más de 5,y resisten por más de 3.
+		if(fuerzaIngresada > 5 && resistenciaIngresada > 3)
+		{
+			contadorPersonajes5y3++;
+		}
+		//c) Cuantos arqueros sin bonificación tienen fuerza de ataque menor a 3 pero resistencia mayor a 3.
+		if(tipoPersonajeIngresado == "arquero" && bonificacionIngresada == "no" && fuerzaIngresada < 3 && resistenciaIngresada > 3)
+		{
+			arquerosSinBonif++;
+		}
+		//d) Cual es el promedio de fuerza de ataque de todos los guerreros sin bonificación,
+		// y cual de todos los magos con bonificación.
+		if(bonificacionIngresada == "no")
+		{
+			sumaFuerzaSinBonif = sumaFuerzaSinBonif + fuerzaIngresada;
+			contadorFuerzaSinBonif++;
+			if(tipoPersonajeIngresado == "mago")
+			{
+				magoFuerzaBonificacion = fuerzaIngresada * 5;
+				sumaMagoBonif = sumaMagoBonif + fuerzaIngresada;
+				contadorMagoBonif++;
+			}
+		}
+		//e) Que porcentaje del total de personajes ingresados representa cada tipo de personaje.
+		switch(tipoPersonajeIngresado)
+		{
+			case "guerrero":
+				cantidadGuerrero++;
+			break
+			case "arquero":
+				cantidadArquero++;
+			break
+			case "mago":
+				cantidadMago++;
+			break
 		}
 
 		contador++;
-		respuesta = prompt("Quiere volver a ingresar un titulo nuevo? si/no: ");
+		respuesta = prompt("Quiere añadir un nuevo personaje?: ");
 	}
-	porcentajeLibrosGeneroDrama = 100 * (cantLibrosDrama / contador);
-	porcentajeLibrosGeneroTerror = 100 * (cantLibrosTerror / contador);
-	porcentajeLibrosGeneroCF = 100 * (cantLibrosCF / contador);
-	
-	document.write("El libro más barato de drama con su importe: " + libroMasBaratoDrama + " y su importe es de " + importeMasBaratoDrama + "<br>");
-	document.write("Del libro más caro, el título: " + libroMasCaro + "<br>");
-	document.write("La cantidad de libros que sean de ciencia ficción y cuesten menos de $700: " + cantLibrosCFBaratos + "<br>");
 
-	document.write("Porcentaje de libros de cada género drama: " + porcentajeLibrosGeneroDrama + "%<br>");
-	document.write("Porcentaje de libros de cada género terror: " + porcentajeLibrosGeneroTerror + "%<br>");
-	document.write("Porcentaje de libros de cada género CF: " + porcentajeLibrosGeneroCF + "%<br>");
+	promedioFuerzaSinBonif = sumaFuerzaSinBonif / contadorFuerzaSinBonif;
+	promedioMagoBonif = sumaMagoBonif / contadorMagoBonif;
+	porcentajeGuerrero = cantidadGuerrero / contador;
+	porcentajeArquero = cantidadArquero / contador;
+	porcentajeMago =  cantidadMago / contador;
+
+	document.write("a) Nombre y tipo de personaje del personaje más poderoso y el más débil con y sin bonificación: " + libroMasCaro + "<br>");
+	document.write("b)Cuantos personajes de cada tipo atacan por más de 5,y resisten por más de 3: " + libroMasCaro + "<br>");
+	document.write("c)Cuantos arqueros sin bonificación tienen fuerza de ataque menor a 3 pero resistencia mayor a 3: " + libroMasCaro + "<br>");
+	document.write("Del libro más caro, el título: " + libroMasCaro + "<br>");
+	document.write("Del libro más caro, el título: " + libroMasCaro + "<br>");
 
 }
+
+/*	a) Nombre y tipo de personaje del personaje más poderoso y el más débil con y sin bonificación.
+	b) Cuantos personajes de cada tipo atacan por más de 5,y resisten por más de 3.
+	c) Cuantos arqueros sin bonificación tienen fuerza de ataque menor a 3 pero resistencia mayor a 3.
+	d) Cual es el promedio de fuerza de ataque de todos los guerreros sin bonificación,
+	y cual de todos los magos con bonificación.
+	e) Que porcentaje del total de personajes ingresados representa cada tipo de personaje.
+*/
