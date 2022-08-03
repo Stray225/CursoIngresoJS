@@ -29,13 +29,13 @@ function mostrar()
 	let bonificacion = 2;
 	// a) mas poderoso y mas debil
 	let pjMasFuerte;
-	let banderaMasFuerte;
+	let banderaMasFuerte = false;
 	let fuerzaMasFuerte;
 	let tipoMasFuerte;
 	let tipoMasFuerteBonificacionFuerza;
 	let tipoMasFuerteBonificacionResistencia;
 	let pjMasDebil;
-	let banderaMasDebil;
+	let banderaMasDebil = false;
 	let fuerzaMasDebil;
 	let tipoMasDebil;
 	let tipoMasDebilBonificacionFuerza;
@@ -94,8 +94,8 @@ function mostrar()
 			pjMasFuerte = nombreIngresado;
 			tipoMasFuerte = tipoPersonajeIngresado;
 			banderaMasFuerte = true;
-			tipoMasFuerteBonificacionFuerza = fuerzaIngresada * 5;
-			tipoMasFuerteBonificacionResistencia = resistenciaIngresada * 5;
+			tipoMasFuerteBonificacionFuerza = fuerzaIngresada * bonificacion;
+			tipoMasFuerteBonificacionResistencia = resistenciaIngresada * bonificacion;
 		}
 
 		if (fuerzaIngresada < fuerzaMasDebil || banderaMasDebil == false)
@@ -103,8 +103,8 @@ function mostrar()
 			pjMasDebil = nombreIngresado;
 			tipoMasDebil = tipoPersonajeIngresado;
 			banderaMasDebil = true;
-			tipoMasDebilBonificacionFuerza = fuerzaIngresada * 5;
-			tipoMasDebilBonificacionResistencia = resistenciaIngresada * 5;
+			tipoMasDebilBonificacionFuerza = fuerzaIngresada * bonificacion;
+			tipoMasDebilBonificacionResistencia = resistenciaIngresada * bonificacion;
 		}
 
 		//b) Cuantos personajes de cada tipo atacan por más de 5,y resisten por más de 3.
@@ -125,8 +125,8 @@ function mostrar()
 			contadorFuerzaSinBonif++;
 			if(tipoPersonajeIngresado == "mago")
 			{
-				magoFuerzaBonificacion = fuerzaIngresada * 5;
-				sumaMagoBonif = sumaMagoBonif + fuerzaIngresada;
+				magoFuerzaBonificacion = fuerzaIngresada * bonificacion;
+				sumaMagoBonif = sumaMagoBonif + magoFuerzaBonificacion;
 				contadorMagoBonif++;
 			}
 		}
@@ -148,17 +148,101 @@ function mostrar()
 		respuesta = prompt("Quiere añadir un nuevo personaje?: ");
 	}
 
+	// porcentajes
 	promedioFuerzaSinBonif = sumaFuerzaSinBonif / contadorFuerzaSinBonif;
 	promedioMagoBonif = sumaMagoBonif / contadorMagoBonif;
 	porcentajeGuerrero = cantidadGuerrero / contador;
 	porcentajeArquero = cantidadArquero / contador;
 	porcentajeMago =  cantidadMago / contador;
 
-	document.write("a) Nombre y tipo de personaje del personaje más poderoso y el más débil con y sin bonificación: " + libroMasCaro + "<br>");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	// porcentaje: (la variable porcentaje entre todo= a la suma de la cantidad / contador general)
+	porcentajeGuerrero = cantidadGuerrero / contador;
+
+
+	// banderas
+	if (fuerzaIngresada < fuerzaMasDebil || banderaMasDebil == false)
+	banderaMasDebil = true;
+
+	
+	// while
+	while(respuesta == "si")
+	respuesta = prompt("Quiere añadir un nuevo personaje?: ");
+
+
+	// switch   (Con numeros va con comillas también, usar también default)
+	switch(tipoPersonajeIngresado)
+	{
+		case "guerrero":
+			cantidadGuerrero++;
+		break
+		case "arquero":
+			cantidadArquero++;
+		break
+		case "mago":
+			cantidadMago++;
+		break
+	}
+
+	// document.write
+	document.write(": " + variable + "<br>");
+
+
+	// descuentos y aumentos CON SWITCH:
+		if (porcentajeDescuentoDestino > 1)
+		{
+			precioFinal = precioAsiento * porcentajeDescuentoDestino;
+		}
+		else
+		{
+			precioFinal = precioAsiento - (precioAsiento * porcentajeDescuentoDestino)
+		}
+
+	// for igual a 5 productos
+	for (i = 0; i < 5; i++)
+	{
+		//codigo;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	document.write("b)Cuantos personajes de cada tipo atacan por más de 5,y resisten por más de 3: " + libroMasCaro + "<br>");
 	document.write("c)Cuantos arqueros sin bonificación tienen fuerza de ataque menor a 3 pero resistencia mayor a 3: " + libroMasCaro + "<br>");
-	document.write("Del libro más caro, el título: " + libroMasCaro + "<br>");
-	document.write("Del libro más caro, el título: " + libroMasCaro + "<br>");
+	document.write("d.1)promedio de fuerza de ataque de todos los guerreros sin bonificación: " + libroMasCaro + "<br>");
+	document.write("d.2)promedio de cual de todos los magos con bonificación: " + libroMasCaro + "<br>");
+	document.write("e) Que porcentaje del total de personajes ingresados representa cada tipo de personaje: " + libroMasCaro + "<br>");
 
 }
 

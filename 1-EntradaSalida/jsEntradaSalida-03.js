@@ -8,7 +8,7 @@ el precio por asiento es 1500 pesos, informar:
 1) la recaudación total bruta del vuelo
 2) la cantidad total asientos ocupados
 3) la edad promedio por pasajero
-
+4) El precio Final:
 Tener en cuenta que:
 
 dependiendo el destino seleccionado se aplican aumentos o descuentos según corresponda:
@@ -21,11 +21,7 @@ según la cantidad de asientos reservados se aplican ciertos descuentos sobre el
 1 pasajero 10% descuento
 2-3 pasajeros 15% descuento
 4-5 pasajeros 20% descuento
-
-
 */
-
-/*
 
 function mostrar()
 {
@@ -37,17 +33,22 @@ function mostrar()
 	let precioAsiento = 1500;
 
 	let respuesta = "si";
-	let recaudación = 0;
 	let asientosOcupados = 0;
 	let edadPromedio = 0;
 	let sumaEdades = 0;
 	let contador = 0;
 	let recaudacionBruta = 0;
+	
+	let precioFinal = 0;
+	let precioFinalVuelo = 0;
+	let porcentajeDescuentoDestino = 0;
+	let porcentajeDescuentoAsientos = 0;
+	let precioFinalAsientos = 0;
 
-	while(respuesta = "si")
+	while(respuesta == "si")
 	{
-		nombreIngresado = prompt("Ingrese su nombre: ");
-		edadIngresada = parseInt(prompt("Ingrese su edad: "));
+		nombreIngresado = prompt("Ingrese su nombre del pasajero: ");
+		edadIngresada = parseInt(prompt("Ingrese su edad del pasajero: "));
 		while(edadIngresada < 13 || edadIngresada > 85)
 		{
 			edadIngresada = parseInt(prompt("REingrese su edad POR FAVOR: "));
@@ -63,7 +64,7 @@ function mostrar()
 			cantKilometros = parseInt(prompt("REingrese la cantidad de kilometros de su viaje POR FAVOR: "));
 		}
 		destino = prompt("Ingrese su destino a continuación: ");
-		while(destino!="rio de janerio" && destino!="italia" && destino!="cancun" && destino!="japon")
+		while(destino!="rio de janeiro" && destino!="italia" && destino!="cancun" && destino!="japon")
 		{
 			destino = prompt("REingrese su destino a continuación POR FAVOR: ");
 		}
@@ -76,19 +77,61 @@ function mostrar()
 
 
 
+		switch(destino)
+		{
+			case "japon":
+				porcentajeDescuentoDestino = 1.4;
+			break
+
+			case "rio de janeiro":
+				porcentajeDescuentoDestino = 0.1;	
+			break
+
+			case "italia":
+				porcentajeDescuentoDestino =  1.25;
+			break
+
+			case "cancun":
+				porcentajeDescuentoDestino = 0.05;
+			break
+		}
+
+		if (porcentajeDescuentoDestino > 1)
+		{
+			precioFinal = precioAsiento * porcentajeDescuentoDestino;
+		}
+		else
+		{
+			precioFinal = precioAsiento - (precioAsiento * porcentajeDescuentoDestino)
+		}
+
+		switch(cantAsientos)
+		{
+			case 1:
+				porcentajeDescuentoAsientos = 0.1;
+			break
+
+			case 2:
+			case 3:
+				porcentajeDescuentoAsientos = 0.15;
+			break
+
+			case 4:
+			case 5:
+				porcentajeDescuentoAsientos = 0.2;
+			break
+		}
+
+		precioFinalAsientos = precioFinal - (precioFinal * porcentajeDescuentoAsientos)
+		precioFinalVuelo = precioFinalVuelo + precioFinalAsientos;
 
 		contador++;
 		respuesta = prompt("Desea ingresar un nuevo pasajero? si/no: ");
 	}
-
-		// 3) la edad promedio por pasajero
 		edadPromedio = sumaEdades / contador;
 
-	document.write("La recaudación total bruta del vuelo: " + recaudacionBruta + "%<br>");
-	document.write("La cantidad total asientos ocupados: " + asientosOcupados + "%<br>");
-	document.write("La edad promedio por pasajero: " + edadPromedio + "%<br>");
+	document.write("La recaudación total bruta del vuelo: " + recaudacionBruta + "<br>");
+	document.write("La cantidad total asientos ocupados: " + asientosOcupados + "<br>");
+	document.write("La edad promedio por pasajero: " + edadPromedio + "<br>");
+	document.write("Precio final del vuelo: " + precioFinalVuelo + "<br>");
 }
-/*
-1) la recaudación total bruta del vuelo
-2) la cantidad total asientos ocupados
-3) la edad promedio por pasajero
